@@ -55,8 +55,10 @@ class Catalogue {
   search(criteria) {
     if (criteria.price) {
       return this.products.filter((product)=> product.price<criteria.price)
-    } else {
+    } else if (criteria.keyword) {
       return this.products.filter((product)=> product.name.search(criteria.keyword) !== -1)
+    } else {
+      throw new Error("Bad search");
     }
   }
 }

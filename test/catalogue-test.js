@@ -114,5 +114,8 @@ describe("Catalogue", () => {
       expect(result).to.have.lengthOf(1);
       expect(result[0].name).to.equal("Product 1");
     })
+    it("should throw Error when criteria has neither key", () => {
+      expect(() => cat.search({ otherkey: "othervalue" })).to.throw("Bad search");
+    })
   })
 });
