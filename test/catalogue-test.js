@@ -93,4 +93,20 @@ describe("Catalogue", () => {
       expect(rejectedProduct).to.be.undefined;
     });
   });
+  
+  describe("search", () => {
+    beforeEach( () => {
+      cat = new Catalogue("Test Catalogue");
+      cat.addProduct(new Product("A123", "Product 1", 100, 10, 10.0));
+      cat.addProduct(new Product("A124", "Product 2", 100, 10, 20.0));
+      cat.addProduct(new Product("A125", "Product 3", 100, 10, 30.0));
+    });
+    it("should return products whose price is less than the price given in the key", () => {
+      const result = cat.search({ price: 25.00 });
+      expect(result).to.be.an.instanceOf(Array);
+      expect(result).to.have.lengthOf(2);
+      const resultProductsIds = result.map((product) => product.id);
+      expect(resultProductsIds).to.have.members(["A123", "A124"]);
+    });
+  })
 });

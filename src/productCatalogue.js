@@ -51,5 +51,11 @@ class Catalogue {
       .reduce((acc, p) => acc + 1, 0);
     return noProductsAdded;
   }
+
+  search(criteria) {
+    if (criteria.price) {
+      return this.products.filter((product)=> product.price<criteria.price)
+    }
+  }
 }
 module.exports = Catalogue;
