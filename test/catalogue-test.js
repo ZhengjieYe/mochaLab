@@ -108,5 +108,11 @@ describe("Catalogue", () => {
       const resultProductsIds = result.map((product) => product.id);
       expect(resultProductsIds).to.have.members(["A123", "A124"]);
     });
+    it("should return products whose name contains the keyword given in the key", () => {
+      const result = cat.search({ keyword: "1" });
+      expect(result).to.be.an.instanceOf(Array);
+      expect(result).to.have.lengthOf(1);
+      expect(result[0].name).to.equal("Product 1");
+    })
   })
 });
