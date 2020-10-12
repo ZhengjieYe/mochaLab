@@ -117,5 +117,13 @@ describe("Catalogue", () => {
     it("should throw Error when criteria has neither key", () => {
       expect(() => cat.search({ otherkey: "othervalue" })).to.throw("Bad search");
     })
+    it("should return empty when the key's value is invalid", () => {
+      expect(() => cat.search({ price: "aa" })).to.throw("Bad search");
+      result = cat.search({ price: "25.00" });
+      expect(result).to.be.an.instanceOf(Array);
+      expect(result).to.have.lengthOf(2);
+      const resultProductsIds = result.map((product) => product.id);
+      expect(resultProductsIds).to.have.members(["A123", "A124"]);
+    })
   })
 });
